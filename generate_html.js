@@ -102,7 +102,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
           URL.revokeObjectURL(url);
 
           // Redirect to the generated HTML page
-          window.location.href = htmlFileName;
+          window.location.href = URL;
         })
         .catch(function(error) {
           console.log(error.message);
