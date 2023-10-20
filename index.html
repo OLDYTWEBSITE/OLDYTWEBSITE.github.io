@@ -1,38 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Subdomain</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Video Uploading Website</title>
 </head>
 <body>
-    <h1>Video Subdomain</h1>
-    <form id="uploadForm">
-        <input type="file" id="videoFile" accept="video/*">
-        <button type="button" onclick="generateSubdomainURL()">Generate Subdomain</button>
+  <header>
+    <h1>Video Uploading Website</h1>
+  </header>
+
+  <main>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+      <input type="file" name="video" accept="video/*">
+      <input type="submit" value="Upload">
     </form>
-    <div id="videoContainer"></div>
-
-    <script>
-        function generateRandomString(length) {
-            let result = '';
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
-
-        function generateSubdomainURL() {
-            const randomID = generateRandomString(8);
-            const videoFile = document.getElementById('videoFile').files[0];
-            const videoURL = URL.createObjectURL(videoFile);
-            const subdomainURL = 'https://https://oldytwebsite.github.io' + randomID;
-
-            const videoContainer = document.getElementById('videoContainer');
-            videoContainer.innerHTML = '<video src="' + videoURL + '" controls></video>';
-            window.location.href = subdomainURL;
-        }
-    </script>
+  </main>
 </body>
 </html>
