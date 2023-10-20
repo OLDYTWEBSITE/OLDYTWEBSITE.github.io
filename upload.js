@@ -100,8 +100,6 @@ document.querySelector('form').addEventListener('submit', function(event) {
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
 
-          // Redirect to the generated HTML page
-          window.location.href = htmlFileName;
         })
         .catch(function(error) {
           console.log(error.message);
